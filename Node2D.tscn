@@ -1,0 +1,331 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Node2D.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/architect-s-daughter/ArchitectsDaughter32.tres" type="DynamicFont" id=2]
+[ext_resource path="res://CalendarCell.tscn" type="PackedScene" id=3]
+
+[node name="Calendar" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 660.0
+margin_bottom = 580.0
+color = Color( 0.560784, 0.560784, 0.560784, 1 )
+
+[node name="Container" type="Container" parent="."]
+margin_right = 665.0
+margin_bottom = 498.0
+
+[node name="DateAndMonth" type="Label" parent="Container"]
+margin_left = 100.0
+margin_right = 565.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+
+[node name="DaysOfTheWeek" type="GridContainer" parent="Container"]
+margin_left = 1.0
+margin_top = 60.0
+margin_right = 660.0
+margin_bottom = 110.0
+custom_constants/hseparation = 0
+columns = 7
+
+[node name="Monday" type="Label" parent="Container/DaysOfTheWeek"]
+light_mask = 3
+margin_right = 95.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Monday"
+align = 1
+valign = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Container/DaysOfTheWeek/Monday"]
+margin_right = 94.0
+margin_bottom = 50.0
+border_color = Color( 0, 0, 0, 1 )
+editor_only = false
+
+[node name="Tuesday" type="Label" parent="Container/DaysOfTheWeek"]
+margin_left = 95.0
+margin_right = 189.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Tuesday"
+align = 1
+valign = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Container/DaysOfTheWeek/Tuesday"]
+margin_left = -1.0
+margin_right = 93.0
+margin_bottom = 50.0
+border_color = Color( 0, 0, 0, 1 )
+editor_only = false
+
+[node name="Wednesday" type="Label" parent="Container/DaysOfTheWeek"]
+margin_left = 189.0
+margin_right = 283.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Wednesday"
+align = 1
+valign = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Container/DaysOfTheWeek/Wednesday"]
+margin_left = -1.0
+margin_right = 93.0
+margin_bottom = 50.0
+border_color = Color( 0, 0, 0, 1 )
+editor_only = false
+
+[node name="Thursday" type="Label" parent="Container/DaysOfTheWeek"]
+margin_left = 283.0
+margin_right = 377.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Thursday"
+align = 1
+valign = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Container/DaysOfTheWeek/Thursday"]
+margin_left = -1.0
+margin_right = 93.0
+margin_bottom = 50.0
+border_color = Color( 0, 0, 0, 1 )
+editor_only = false
+
+[node name="Friday" type="Label" parent="Container/DaysOfTheWeek"]
+margin_left = 377.0
+margin_right = 471.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Friday"
+align = 1
+valign = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Container/DaysOfTheWeek/Friday"]
+margin_left = -1.0
+margin_right = 93.0
+margin_bottom = 50.0
+border_color = Color( 0, 0, 0, 1 )
+editor_only = false
+
+[node name="Saturday" type="Label" parent="Container/DaysOfTheWeek"]
+margin_left = 471.0
+margin_right = 565.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Saturday"
+align = 1
+valign = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Container/DaysOfTheWeek/Saturday"]
+margin_left = -1.0
+margin_right = 93.0
+margin_bottom = 50.0
+border_color = Color( 0, 0, 0, 1 )
+editor_only = false
+
+[node name="Sunday" type="Label" parent="Container/DaysOfTheWeek"]
+margin_left = 565.0
+margin_right = 659.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Sunday"
+align = 1
+valign = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Container/DaysOfTheWeek/Sunday"]
+margin_left = -1.0
+margin_right = 93.0
+margin_bottom = 50.0
+border_color = Color( 0, 0, 0, 1 )
+editor_only = false
+
+[node name="Week1" type="Container" parent="."]
+margin_left = 1.0
+margin_top = 110.0
+margin_right = 5.0
+margin_bottom = 129.0
+
+[node name="CalendarCell" parent="Week1" instance=ExtResource( 3 )]
+position = Vector2( -1, -1 )
+
+[node name="CalendarCell2" parent="Week1" instance=ExtResource( 3 )]
+position = Vector2( 93, -1 )
+
+[node name="CalendarCell3" parent="Week1" instance=ExtResource( 3 )]
+position = Vector2( 187, -1 )
+
+[node name="CalendarCell4" parent="Week1" instance=ExtResource( 3 )]
+position = Vector2( 281, -1 )
+
+[node name="CalendarCell5" parent="Week1" instance=ExtResource( 3 )]
+position = Vector2( 375, -1 )
+
+[node name="CalendarCell6" parent="Week1" instance=ExtResource( 3 )]
+position = Vector2( 469, -1 )
+
+[node name="CalendarCell7" parent="Week1" instance=ExtResource( 3 )]
+position = Vector2( 563, -1 )
+
+[node name="Week2" type="Container" parent="."]
+margin_left = 1.0
+margin_top = 188.0
+margin_right = 5.0
+margin_bottom = 203.0
+
+[node name="CalendarCell" parent="Week2" instance=ExtResource( 3 )]
+position = Vector2( -1, -1 )
+
+[node name="CalendarCell2" parent="Week2" instance=ExtResource( 3 )]
+position = Vector2( 93, -1 )
+
+[node name="CalendarCell3" parent="Week2" instance=ExtResource( 3 )]
+position = Vector2( 187, -1 )
+
+[node name="CalendarCell4" parent="Week2" instance=ExtResource( 3 )]
+position = Vector2( 281, -1 )
+
+[node name="CalendarCell5" parent="Week2" instance=ExtResource( 3 )]
+position = Vector2( 375, -1 )
+
+[node name="CalendarCell6" parent="Week2" instance=ExtResource( 3 )]
+position = Vector2( 469, -1 )
+
+[node name="CalendarCell7" parent="Week2" instance=ExtResource( 3 )]
+position = Vector2( 563, -1 )
+
+[node name="Week3" type="Container" parent="."]
+margin_left = 1.0
+margin_top = 266.0
+margin_right = 5.0
+margin_bottom = 277.0
+
+[node name="CalendarCell" parent="Week3" instance=ExtResource( 3 )]
+position = Vector2( -1, -1 )
+
+[node name="CalendarCell2" parent="Week3" instance=ExtResource( 3 )]
+position = Vector2( 93, -1 )
+
+[node name="CalendarCell3" parent="Week3" instance=ExtResource( 3 )]
+position = Vector2( 187, -1 )
+
+[node name="CalendarCell4" parent="Week3" instance=ExtResource( 3 )]
+position = Vector2( 281, -1 )
+
+[node name="CalendarCell5" parent="Week3" instance=ExtResource( 3 )]
+position = Vector2( 375, -1 )
+
+[node name="CalendarCell6" parent="Week3" instance=ExtResource( 3 )]
+position = Vector2( 469, -1 )
+
+[node name="CalendarCell7" parent="Week3" instance=ExtResource( 3 )]
+position = Vector2( 563, -1 )
+
+[node name="Week4" type="Container" parent="."]
+margin_left = 1.0
+margin_top = 344.0
+margin_right = 5.0
+margin_bottom = 351.0
+
+[node name="CalendarCell" parent="Week4" instance=ExtResource( 3 )]
+position = Vector2( -1, -1 )
+
+[node name="CalendarCell2" parent="Week4" instance=ExtResource( 3 )]
+position = Vector2( 93, -1 )
+
+[node name="CalendarCell3" parent="Week4" instance=ExtResource( 3 )]
+position = Vector2( 187, -1 )
+
+[node name="CalendarCell4" parent="Week4" instance=ExtResource( 3 )]
+position = Vector2( 281, -1 )
+
+[node name="CalendarCell5" parent="Week4" instance=ExtResource( 3 )]
+position = Vector2( 375, -1 )
+
+[node name="CalendarCell6" parent="Week4" instance=ExtResource( 3 )]
+position = Vector2( 469, -1 )
+
+[node name="CalendarCell7" parent="Week4" instance=ExtResource( 3 )]
+position = Vector2( 563, -1 )
+
+[node name="Week5" type="Container" parent="."]
+margin_left = 1.0
+margin_top = 422.0
+margin_right = 5.0
+margin_bottom = 425.0
+
+[node name="CalendarCell" parent="Week5" instance=ExtResource( 3 )]
+position = Vector2( -1, -1 )
+
+[node name="CalendarCell2" parent="Week5" instance=ExtResource( 3 )]
+position = Vector2( 93, -1 )
+
+[node name="CalendarCell3" parent="Week5" instance=ExtResource( 3 )]
+position = Vector2( 187, -1 )
+
+[node name="CalendarCell4" parent="Week5" instance=ExtResource( 3 )]
+position = Vector2( 281, -1 )
+
+[node name="CalendarCell5" parent="Week5" instance=ExtResource( 3 )]
+position = Vector2( 375, -1 )
+
+[node name="CalendarCell6" parent="Week5" instance=ExtResource( 3 )]
+position = Vector2( 469, -1 )
+
+[node name="CalendarCell7" parent="Week5" instance=ExtResource( 3 )]
+position = Vector2( 563, -1 )
+
+[node name="Week6" type="Container" parent="."]
+margin_left = 1.0
+margin_top = 500.0
+margin_right = 5.0
+margin_bottom = 129.0
+
+[node name="CalendarCell" parent="Week6" instance=ExtResource( 3 )]
+position = Vector2( -1, -1 )
+
+[node name="CalendarCell2" parent="Week6" instance=ExtResource( 3 )]
+position = Vector2( 93, -1 )
+
+[node name="CalendarCell3" parent="Week6" instance=ExtResource( 3 )]
+position = Vector2( 187, -1 )
+
+[node name="CalendarCell4" parent="Week6" instance=ExtResource( 3 )]
+position = Vector2( 281, -1 )
+
+[node name="CalendarCell5" parent="Week6" instance=ExtResource( 3 )]
+position = Vector2( 375, -1 )
+
+[node name="CalendarCell6" parent="Week6" instance=ExtResource( 3 )]
+position = Vector2( 469, -1 )
+
+[node name="CalendarCell7" parent="Week6" instance=ExtResource( 3 )]
+position = Vector2( 563, -1 )

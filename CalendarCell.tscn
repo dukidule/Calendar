@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Fonts/cmu-typewriter/Typewriter.tres" type="DynamicFont" id=1]
+[ext_resource path="res://CalendarCell.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[node name="CalendarCell" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 95.0
+margin_bottom = 79.8
+color = Color( 0.560784, 0.560784, 0.560784, 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 23.0
+margin_bottom = 24.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 1 )
+text = "
+"
+scroll_active = false
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 95.0
+margin_bottom = 79.8
+border_color = Color( 0, 0, 0, 1 )
+editor_only = false
+
+[node name="TextEdit" type="TextEdit" parent="."]
+margin_left = 1.0
+margin_top = 23.0
+margin_right = 95.0
+margin_bottom = 79.8
+custom_styles/read_only = SubResource( 1 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_styles/completion = SubResource( 4 )
