@@ -86,8 +86,9 @@ func _get_current_month(month: int) -> int:
 			days_count = 31
 			return days_count
 		_: 
+			days_count = 31
 			print("Month not found.")
-			return 0
+			return days_count
 
 
 
@@ -133,9 +134,11 @@ func _get_first_day(current_month_first_weekday: int):
 		if i > 1 && index==0:
 			index=6
 			i-=1
+		
 		else: 
 			i-=1
 			index-=1
+			print("Mesec x" + str(index))
 	last_month_weekday = weekdays[index]
 	print(last_month_weekday)
 
@@ -179,8 +182,6 @@ func _day_cells(month: int, weekday: int, date: int):
 		#print(last_month_days)
 		var current_cell = all_cells[cell_index-1]
 		#print("nemojme" + str(cell_index))
-		if month == 1:
-			last_month_days = _get_current_month(12)
 		current_cell.label.text = str(last_month_days)
 		current_cell.calendar_cell.color = Color(0.14,0.13,0.13)
 		current_cell.calendar_cell.modulate.a = 0.5
@@ -235,14 +236,13 @@ func _on_last_month_button_pressed():
 	current_month-=1
 	#print("I am last weekday!!!" + str(last_weekday))
 	_get_first_day(last_weekday)
-	_day_cells(current_month, last_month_weekday, last_month_num_days)
 	current_month_label = get_label_text._get_current_month_label(current_month)
 	if "January" in label_text.text:
 		on_open_year -=1
 		current_month=12
+	_day_cells(current_month, last_month_weekday, last_month_num_days)
+	current_month_label = get_label_text._get_current_month_label(current_month)
 	label_text.text = current_month_label + " " + str(on_open_year)
-	if current_month == 1:
-		current_month = 12
 	pass # Replace with function body.
 
 
