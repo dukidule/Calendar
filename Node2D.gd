@@ -29,7 +29,8 @@ var current_month = on_open_month
 func _ready():
 	number_of_days = _get_current_month(current_month)
 	_get_current_weekday_label(on_open_weekday)
-	_day_cells(on_open_month, on_open_weekday, on_open_date)
+	_day_cells(on_open_month, on_open_weekday-1, on_open_date)
+	
 	current_month_label = get_label_text._get_current_month_label(current_month)
 	label_text.text = current_month_label + " " + str(on_open_year)
 
@@ -112,18 +113,41 @@ func _get_current_weekday_label(weekday: int):
 
 var day_cells = []
 
+var this_month_weekday = on_open_weekday
 var next_month_date = 1
 var next_month_weekday
-var last_month_end_day
+var last_month_num_days = number_of_days
+var last_month_last_day
+var last_month_weekday
+var last_weekday
 
+func _get_first_day(current_month_first_weekday: int):
+	var weekdays = [1,2,3,4,5,6,7]
+	var index = current_month_first_weekday
+	var days_count = _get_current_month(current_month)
+	print(current_month_first_weekday)
+	var i = days_count%7
+	#print(days_count)
+	#print(i)
+	while i > 0:
+		if i > 1 && index==0:
+			index=6
+			i-=1
+		else: 
+			i-=1
+			index-=1
+	last_month_weekday = weekdays[index]
+	print(last_month_weekday)
 
 func _day_cells(month: int, weekday: int, date: int):
+	var trigger = true
 	number_of_days = _get_current_month(month)
 	var all_cells = []
 	day_cells = []
 	var cell_index
 	var next_month_first_day=1
 	next_month_weekday=0
+	
 	day_cells.append(get_node("Week1").get_children())
 	day_cells.append(get_node("Week2").get_children())
 	day_cells.append(get_node("Week3").get_children())
@@ -133,7 +157,7 @@ func _day_cells(month: int, weekday: int, date: int):
 	
 	var finding_cell
 	var lookup_cell
-	var last_month = _get_current_month(current_month-1)
+	var last_month_days = _get_current_month(month-1)
 	
 		#print("ooga booga" + " " + str(date))
 		#print(weekday)
@@ -141,7 +165,6 @@ func _day_cells(month: int, weekday: int, date: int):
 	finding_cell[weekday-1].label.text = str(date)
 	finding_cell[weekday-1].calendar_cell.color = Color(0.56,0.56,0.56)
 	finding_cell[weekday-1].calendar_cell.modulate.a = 1
-	print("I TRIGGERED.")
 	lookup_cell = finding_cell[weekday-1]
 	for cells in day_cells:
 		for child in cells:
@@ -151,28 +174,36 @@ func _day_cells(month: int, weekday: int, date: int):
 	cell_index = all_cells.find(lookup_cell)
 	#print("Jajaja" + " " + str(cell_index))
 	
+	last_weekday=0
 	while(cell_index>0): 
-		if date == 0:
-			last_month_end_day = (cell_index-1)%7
-		#print(last_month)
+		#print(last_month_days)
 		var current_cell = all_cells[cell_index-1]
-		print("nemojme" + str(cell_index))
-		current_cell.label.text = str(last_month)
-		print(current_cell.label.text)
+		#print("nemojme" + str(cell_index))
+		if month == 1:
+			last_month_days = _get_current_month(12)
+		current_cell.label.text = str(last_month_days)
 		current_cell.calendar_cell.color = Color(0.14,0.13,0.13)
 		current_cell.calendar_cell.modulate.a = 0.5
+		if trigger == true:
+			last_month_last_day = last_month_days
+			last_weekday = cell_index
+			trigger = false
+		#print(trigger)
+		#print(last_month_num_days)
+		#print(last_weekday)
+		#print(last_month_last_day)
+		#print("I AM CELL INDEX!" + str(cell_index))
 		cell_index-=1
-		last_month-=1
+		last_month_days-=1
 	
 	cell_index = all_cells.find(lookup_cell)
 	date = on_open_date
 		
 	while(date<number_of_days):
 		date+=1
-		print("mojme" + str(cell_index))
+		#print("mojme" + str(cell_index))
 		var current_cell = all_cells[cell_index+1]
 		current_cell.label.text = str(date)
-		print(current_cell.label.text)
 		current_cell.calendar_cell.color = Color(0.56,0.56,0.56)
 		current_cell.calendar_cell.modulate.a = 1
 		cell_index+=1
@@ -201,13 +232,17 @@ func _day_cells(month: int, weekday: int, date: int):
 
 
 func _on_last_month_button_pressed():
-	_day_cells(on_open_month, last_month_end_day, on_open_date)
+	current_month-=1
+	#print("I am last weekday!!!" + str(last_weekday))
+	_get_first_day(last_weekday)
+	_day_cells(current_month, last_month_weekday, last_month_num_days)
 	current_month_label = get_label_text._get_current_month_label(current_month)
 	if "January" in label_text.text:
 		on_open_year -=1
+		current_month=12
 	label_text.text = current_month_label + " " + str(on_open_year)
-	if on_open_month == 1:
-		on_open_month = 13
+	if current_month == 1:
+		current_month = 12
 	pass # Replace with function body.
 
 
@@ -221,7 +256,7 @@ func _on_next_month_button_pressed():
 	_day_cells(current_month,next_month_weekday,next_month_date)
 	current_month_label = get_label_text._get_current_month_label(current_month)
 	label_text.text = current_month_label + " " + str(on_open_year)
-	if current_month == 12:
-		current_month = 1
-	print(number_of_days)
+	#if current_month == 12:
+		#current_month = 1
+	#print(number_of_days)
 	pass # Replace with function body.
