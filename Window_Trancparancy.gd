@@ -4,7 +4,8 @@ extends Node
 
 @onready var parent = get_parent()
 func _ready():
-	pass # Replace with function body.
+	get_tree().get_root().set_transparent_background(true)
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_TRANSPARENT, true, 0)
 
 
 
@@ -21,4 +22,4 @@ func _notification(what):
 		parent.modulate.a = 1
 	elif what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT:
 		get_tree().get_root().set_transparent_background(true)
-		parent.modulate.a = 0.5
+		parent.modulate.a = 0.3
