@@ -150,13 +150,13 @@ func _day_cells(month: int, weekday: int, date: int):
 	var cell_index
 	var next_month_first_day=1
 	next_month_weekday=0
-	
-	day_cells.append(get_node("Week1").get_children())
-	day_cells.append(get_node("Week2").get_children())
-	day_cells.append(get_node("Week3").get_children())
-	day_cells.append(get_node("Week4").get_children())
-	day_cells.append(get_node("Week5").get_children())
-	day_cells.append(get_node("Week6").get_children())
+	if day_cells == []:
+		day_cells.append(get_node("Week1").get_children())
+		day_cells.append(get_node("Week2").get_children())
+		day_cells.append(get_node("Week3").get_children())
+		day_cells.append(get_node("Week4").get_children())
+		day_cells.append(get_node("Week5").get_children())
+		day_cells.append(get_node("Week6").get_children())
 	
 	var finding_cell
 	var lookup_cell
