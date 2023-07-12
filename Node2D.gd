@@ -24,13 +24,15 @@ var current_weekday_label = ""
 #used variables
 var number_of_days = 1
 var current_month = on_open_month
+var on_open_month_first_weekday
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	number_of_days = _get_current_month(current_month)
+	on_open_month_first_weekday = current_month_first_day(on_open_weekday)
 	_get_current_weekday_label(on_open_weekday)
-	_day_cells(on_open_month, on_open_weekday-1, on_open_date)
-	
+	_day_cells(on_open_month, on_open_month_first_weekday, on_open_date)
+	print(on_open_month)
 	current_month_label = get_label_text._get_current_month_label(current_month)
 	label_text.text = current_month_label + " " + str(on_open_year)
 
@@ -114,7 +116,7 @@ func _get_current_weekday_label(weekday: int):
 
 var day_cells = []
 
-var this_month_weekday = on_open_weekday
+var this_month_weekday = on_open_month_first_weekday
 var next_month_date = 1
 var next_month_weekday
 var last_month_num_days = number_of_days
@@ -122,11 +124,26 @@ var last_month_last_day
 var last_month_weekday
 var last_weekday
 
-func _get_first_day(current_month_first_weekday: int):
+
+func current_month_first_day(weekday: int) -> int:
+	var date = current_time.day
+	print("ooga booga" + " " + str(date) + " " + str(on_open_weekday))
+	var current_day = weekday
+	while date > 1:
+		if current_day == 0:
+			current_day = 7
+		date-=1
+		current_day-=1
+	print("wasd" + str(current_day))
+	return current_day
+
+
+
+
+func last_month_first_day(current_month_first_weekday: int):
 	var weekdays = [1,2,3,4,5,6,7]
 	var index = current_month_first_weekday
 	var days_count = _get_current_month(current_month)
-	print(current_month_first_weekday)
 	var i = days_count%7
 	#print(days_count)
 	#print(i)
@@ -145,6 +162,7 @@ func _get_first_day(current_month_first_weekday: int):
 func _day_cells(month: int, weekday: int, date: int):
 	var trigger = true
 	number_of_days = _get_current_month(month)
+	#print(number_of_days)
 	var all_cells = []
 	day_cells = []
 	var cell_index
@@ -221,8 +239,6 @@ func _day_cells(month: int, weekday: int, date: int):
 			#print(index)
 		cell_index+=1
 		next_month_first_day+=1
-	
-	
 
 
 
@@ -235,7 +251,7 @@ func _day_cells(month: int, weekday: int, date: int):
 func _on_last_month_button_pressed():
 	current_month-=1
 	#print("I am last weekday!!!" + str(last_weekday))
-	_get_first_day(last_weekday)
+	last_month_first_day(last_weekday)
 	current_month_label = get_label_text._get_current_month_label(current_month)
 	if "January" in label_text.text:
 		on_open_year -=1
@@ -253,6 +269,7 @@ func _on_next_month_button_pressed():
 	if "December" in current_month_label:
 		on_open_year +=1
 		current_month=1
+	print(next_month_weekday)
 	_day_cells(current_month,next_month_weekday,next_month_date)
 	current_month_label = get_label_text._get_current_month_label(current_month)
 	label_text.text = current_month_label + " " + str(on_open_year)
