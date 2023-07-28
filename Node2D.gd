@@ -8,6 +8,7 @@ extends Node2D
 @onready var get_label_text = get_node("Container/LabelScript")
 @onready var background_color = get_node("Background")
 @onready var rect = get_node("Container/DaysOfTheWeek/Friday/ReferenceRect")
+@onready var save_load = get_node("SaveLoad")
 
 
 
@@ -25,9 +26,18 @@ var current_weekday_label = ""
 var number_of_days = 1
 var current_month = on_open_month
 var on_open_month_first_weekday
+#save-load data
+var id: int
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	save_load.load_data()
+	save_load.cal_data = {}
+	id = save_load.id
+	if id == null: 
+		id = 0
+	print(id)
 	number_of_days = _get_current_month(current_month)
 	on_open_month_first_weekday = current_month_first_day(on_open_weekday)
 	_get_current_weekday_label(on_open_weekday)
@@ -116,7 +126,6 @@ func _get_current_weekday_label(weekday: int):
 
 var day_cells = []
 
-var this_month_weekday = on_open_month_first_weekday
 var next_month_date = 1
 var next_month_weekday
 var last_month_num_days = number_of_days
@@ -164,10 +173,13 @@ func _day_cells(month: int, weekday: int, date: int):
 	number_of_days = _get_current_month(month)
 	#print(number_of_days)
 	var all_cells = []
+	var current_array = []
 	day_cells = []
 	var cell_index
 	var next_month_first_day=1
 	next_month_weekday=0
+	if save_load.cal_data != {}:
+		day_cells = save_load.cal_data[id-1]
 	if day_cells == []:
 		day_cells.append(get_node("Week1").get_children())
 		day_cells.append(get_node("Week2").get_children())
@@ -259,6 +271,9 @@ func _on_last_month_button_pressed():
 	_day_cells(current_month, last_month_weekday, last_month_num_days)
 	current_month_label = get_label_text._get_current_month_label(current_month)
 	label_text.text = current_month_label + " " + str(on_open_year)
+	save_load.cal_data[id] = day_cells
+	id-=1
+	print(save_load.cal_data)
 	pass # Replace with function body.
 
 
@@ -273,6 +288,17 @@ func _on_next_month_button_pressed():
 	_day_cells(current_month,next_month_weekday,next_month_date)
 	current_month_label = get_label_text._get_current_month_label(current_month)
 	label_text.text = current_month_label + " " + str(on_open_year)
+	save_load.cal_data[id] = day_cells
+	if id >= 1:
+		var array1 = []
+		array1 = save_load.cal_data[0]
+		var array2 = []
+		array2 = save_load.cal_data[1]
+		if array1 == array2:
+			print("isti su mamu im jebem.")
+	id+=1
+	
+	#print(save_load.cal_data)
 	#if current_month == 12:
 		#current_month = 1
 	#print(number_of_days)

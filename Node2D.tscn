@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bq0bq6vsf5dsp"]
+[gd_scene load_steps=9 format=3 uid="uid://bq0bq6vsf5dsp"]
 
 [ext_resource type="Script" path="res://Node2D.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://cdufqpf16w1ae" path="res://Fonts/architect-s-daughter/ArchitectsDaughter32.tres" id="2"]
 [ext_resource type="Script" path="res://Window_Trancparancy.gd" id="2_tauka"]
+[ext_resource type="Script" path="res://save_file.gd" id="2_wvq70"]
 [ext_resource type="PackedScene" uid="uid://07xj5kdme0va" path="res://CalendarCell.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bbfaotftfljh1" path="res://Arrow images/Arrow Left.jpg" id="3_j2s4o"]
 [ext_resource type="Script" path="res://LabelScript.gd" id="3_sv15w"]
@@ -10,6 +11,9 @@
 
 [node name="Calendar" type="Node2D"]
 script = ExtResource("1")
+
+[node name="SaveLoad" type="Node" parent="."]
+script = ExtResource("2_wvq70")
 
 [node name="ModulateScript" type="Node" parent="."]
 script = ExtResource("2_tauka")
